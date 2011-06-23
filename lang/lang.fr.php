@@ -16,8 +16,8 @@
 	 */
 	$dictionary = array(
 
-		'Save and return' => 'Enregistrer et retour',
+		'Save & return' => 'Enregistrer et retour',
 		
-		'Save and new' => 'Enregistrer et nouveau',
+		'Save & new' => 'Enregistrer et nouveau',
 	
 	);

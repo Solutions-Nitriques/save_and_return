@@ -84,11 +84,11 @@
 					'style' => 'float:right'
 				));
 				
-				$button_return = $this->createButton('save-and-return', 'Save and return');
+				$button_return = $this->createButton('save-and-return', 'Save & return');
 				
 				$hidden_return = $this->createHidden('save-and-return-h');
 				
-				$button_new = $this->createButton('save-and-new', 'Save and new');
+				$button_new = $this->createButton('save-and-new', 'Save & new');
 				
 				$hidden_new = $this->createHidden('save-and-new-h');
 				
