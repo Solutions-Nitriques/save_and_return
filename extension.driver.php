@@ -18,7 +18,7 @@
 					'website'		=> 'http://www.nitriques.com/open-source/',
 					'email'			=> 'nico (at) nitriques.com'
 				),
-				'description'	=> 'Permits the user to save and return to the list of a section',
+				'description'	=> 'Enables the user to save and return to the list of a section or to save and create a new entry',
 				'compatibility' => array(
 					'2.2.1' => true,
 					'2.2' => true
