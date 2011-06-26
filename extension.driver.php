@@ -11,8 +11,8 @@
 		public function about() {
 			return array(
 				'name'			=> 'Save and Return',
-				'version'		=> '1.0',
-				'release-date'	=> '2011-06-23',
+				'version'		=> '1.1',
+				'release-date'	=> '2011-06-26',
 				'author'		=> array(
 					'name'			=> 'Solutions Nitriques',
 					'website'		=> 'http://www.nitriques.com/open-source/',
@@ -71,11 +71,9 @@
 		}
 		
 		public function appendElement($context) {
-
-			//var_dump($c);die();
 			
-			// if in edit or new page
-			if ($this->isInEditOrNew()) {
+			// if in edit or new page, and not a static section
+			if ($this->isInEditOrNew() && !$this->isStaticSection()) {
 			
 				$form = Administration::instance()->Page->Form;
 				
@@ -164,6 +162,23 @@
 			}
 			
 			return NULL;
+		}
+
+		
+		// this method is an updated copy of the helpers functions present
+		// in the static section ext driver. They should consider
+		// setting this method to public and permit oders developer
+		// to leverage their code
+		public function isStaticSection(){
+			$c = Administration::instance()->getPageCallback();
+			
+			if ($c['driver'] == 'publish' && is_array($c['context'])){
+				$sm = new SectionManager($this->_Parent);
+				$section_id = $sm->fetchIDFromHandle($c['context']['section_handle']);
+				return ($sm->fetch($section_id)->get('static') == 'yes');
+			}
+
+			return false;
 		}
 
 		public function appendJS($context){
