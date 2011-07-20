@@ -37,11 +37,11 @@ http://www.nitriques.com/open-source/
 
 ### History ###
 
-- 1.2 - 2011-07-21
+- 1.2 - 2011-07-21   
   Update for compatibility with Static Section v1.7
 
-- 1.1 - 2011-06-26
+- 1.1 - 2011-06-26   
   Update for compatibility with Static Section v1.6
 
-- 1.0 - 2011-06-23
+- 1.0 - 2011-06-23   
   First release
