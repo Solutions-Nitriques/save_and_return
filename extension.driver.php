@@ -11,12 +11,12 @@
 		public function about() {
 			return array(
 				'name'			=> 'Save and Return',
-				'version'		=> '1.1',
-				'release-date'	=> '2011-06-26',
+				'version'		=> '1.2',
+				'release-date'	=> '2011-07-21',
 				'author'		=> array(
 					'name'			=> 'Solutions Nitriques',
 					'website'		=> 'http://www.nitriques.com/open-source/',
-					'email'			=> 'nico (at) nitriques.com'
+					'email'			=> 'open-source (at) nitriques.com'
 				),
 				'description'	=> 'Enables the user to save and return to the list of a section or to save and create a new entry',
 				'compatibility' => array(
@@ -105,7 +105,7 @@
 			}
 		}
 		
-		function createButton($id, $value) {
+		private function createButton($id, $value) {
 			$btn = new XMLElement('input', NULL, array(
 				'id' => $id,
 				'name' => 'action[save]',
@@ -117,7 +117,7 @@
 			return $btn;
 		}
 		
-		function createHidden($id) {
+		private function createHidden($id) {
 			$h = new XMLElement('input', NULL, array(
 				'id' => $id,
 				'name' => "fields[$id]",
@@ -128,21 +128,21 @@
 			return $h;
 		}
 		
-		function getPath($isNew) {
+		private function getPath($isNew) {
 			if ($isNew) {
 				return '%s/publish/%s/new/';
 			}
 			return '%s/publish/%s/';
 		}
 		
-		function isInEditOrNew() {
+		private function isInEditOrNew() {
 			$c = Administration::instance()->getPageCallback();
 			$c = $c['context']['page'];
 			
 			return ($c == 'edit') || ($c == 'new');
 		}
 		
-		function getChildrenWithClass($rootElement, $tagName, $className) {
+		private function getChildrenWithClass($rootElement, $tagName, $className) {
 			if (! ($rootElement) instanceof XMLElement) {
 				return NULL; // not and XMLElement
 			}
@@ -165,19 +165,14 @@
 		}
 
 		
-		// this method is an updated copy of the helpers functions present
-		// in the static section ext driver. They should consider
-		// setting this method to public and permit oders developer
-		// to leverage their code
-		public function isStaticSection(){
-			$c = Administration::instance()->getPageCallback();
-			
-			if ($c['driver'] == 'publish' && is_array($c['context'])){
-				$sm = new SectionManager($this->_Parent);
-				$section_id = $sm->fetchIDFromHandle($c['context']['section_handle']);
-				return ($sm->fetch($section_id)->get('static') == 'yes');
-			}
 
+		private function isStaticSection(){
+			$static = Symphony::ExtensionManager()->create('static_section');
+			if ($static !== null) {
+				
+				return $static->isStaticSection() && $static->isLimitReached();
+				
+			}
 			return false;
 		}
 
