@@ -20,7 +20,7 @@ Version: 1.2
 ### INSTALLATION ###
 
 - Unzip the anti_brute_force.zip file
-- (re)Name the folder ***anti_brute_force***
+- (re)Name the folder ***save_and_return***
 - Put into the extension directory
 - Enable/install just like any other extension
 
