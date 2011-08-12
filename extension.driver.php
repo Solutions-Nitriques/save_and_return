@@ -167,12 +167,20 @@
 		
 
 		private function isStaticSection(){
-			$static = Symphony::ExtensionManager()->create('static_section');
-			if ($static !== null) {
-				
-				return $static->isStaticSection() && $static->isLimitReached();
-				
+			$extman = Symphony::ExtensionManager();
+			
+			$status = $extman->fetchStatus('static_section');
+			
+			if ($status == EXTENSION_ENABLED) {
+			
+				$static = Symphony::ExtensionManager()->create('static_section');
+				if ($static !== null) {
+					
+					return $static->isStaticSection() && $static->isLimitReached();
+					
+				}
 			}
+			
 			return false;
 		}
 
