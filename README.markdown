@@ -37,8 +37,8 @@ http://www.nitriques.com/open-source/
 
 ### History ###
 
-- 1.3 - 2012-02-21  
-  Added the extension.meta.xml file
+- 1.3 - 2012-02-21   
+  Added the extension.meta.xml file   
   Update CSS for hiding the buttons in the Subsection Manager extension   
 
 - 1.2 - 2011-07-21   
