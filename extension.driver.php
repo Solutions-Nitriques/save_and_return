@@ -11,8 +11,8 @@
 		public function about() {
 			return array(
 				'name'			=> 'Save and Return',
-				'version'		=> '1.2',
-				'release-date'	=> '2011-07-21',
+				'version'		=> '1.3',
+				'release-date'	=> '2012-02-21',
 				'author'		=> array(
 					'name'			=> 'Solutions Nitriques',
 					'website'		=> 'http://www.nitriques.com/open-source/',
@@ -20,6 +20,10 @@
 				),
 				'description'	=> 'Enables the user to save and return to the list of a section or to save and create a new entry',
 				'compatibility' => array(
+					'2.2.5' => true,
+					'2.2.4' => true,
+					'2.2.3' => true,
+					'2.2.2' => true,
 					'2.2.1' => true,
 					'2.2' => true
 				)
@@ -72,7 +76,7 @@
 		
 		public function appendElement($context) {
 			
-			// if in edit or new page, and not a static section
+			// if in edit or new page, and not a static section, and not in the subsection manager
 			if ($this->isInEditOrNew() && !$this->isStaticSection()) {
 			
 				$form = Administration::instance()->Page->Form;
@@ -202,9 +206,17 @@
 								});
 							});
 						})(jQuery);"
-					), time()+1
+					), time()+100
 				);
-			
+				
+				// add CSS for subsection manager
+				Administration::instance()->Page->addElementToHead(
+					new XMLElement(
+						'style',
+						"body.inline.subsection #save-and { display: none; visibility: collapse }",
+						array('type' => 'text/css')
+					), time()+101
+				);
 			}
 			
 		}

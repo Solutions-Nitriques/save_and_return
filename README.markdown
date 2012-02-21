@@ -1,6 +1,6 @@
 # Save and Return/New Buttons #
 
-Version: 1.2
+Version: 1.3
 
 ## Enables the user to save and return to the list of a section or to save and create a new entry ##
 
@@ -36,6 +36,9 @@ http://www.nitriques.com/open-source/
   2.2.*       | [latest](https://github.com/Solutions-Nitriques/save_and_return)
 
 ### History ###
+
+- 1.3 - 2012-02-21
+  Update CSS for hiding the buttons in the Subsection Manager extension   
 
 - 1.2 - 2011-07-21   
   Update for compatibility with Static Section v1.7
