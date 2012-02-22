@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<extension id="save-and-return" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+<extension id="save_and_return" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
 	<name>Save and Return/New Buttons</name>
 	<description>Enables the user to save and return to the list of a section or to save and create a new entry</description>
 	<repo type="github">https://github.com/Solutions-Nitriques/save_and_return</repo>
