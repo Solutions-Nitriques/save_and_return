@@ -27,6 +27,6 @@ Version: 1.5
 
 *Voila !*
 
-http://www.nitriques.com/open-source/
-http://www.deuxhuithuit.com
+http://www.nitriques.com/open-source/     
+http://www.deuxhuithuit.com      
 
