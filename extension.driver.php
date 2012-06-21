@@ -3,32 +3,11 @@
 	if(!defined("__IN_SYMPHONY__")) die("<h2>Error</h2><p>You cannot directly access this file</p>");
 
 	/*
+	Copyight: Deux Huit Huit 2012
 	Copyight: Solutions Nitriques 2011
 	License: MIT
 	*/
 	class extension_save_and_return extends Extension {
-
-		public function about() {
-			return array(
-				'name'			=> 'Save and Return',
-				'version'		=> '1.3',
-				'release-date'	=> '2012-02-21',
-				'author'		=> array(
-					'name'			=> 'Solutions Nitriques',
-					'website'		=> 'http://www.nitriques.com/open-source/',
-					'email'			=> 'open-source (at) nitriques.com'
-				),
-				'description'	=> 'Enables the user to save and return to the list of a section or to save and create a new entry',
-				'compatibility' => array(
-					'2.2.5' => true,
-					'2.2.4' => true,
-					'2.2.3' => true,
-					'2.2.2' => true,
-					'2.2.1' => true,
-					'2.2' => true
-				)
-	 		);
-		}
 
 		public function getSubscribedDelegates(){
 			return array(
@@ -39,7 +18,7 @@
 				),
 				array(
 					'page' => '/backend/',
-					'delegate' => 'AppendElementBelowView',
+					'delegate' => 'AdminPagePreGenerate',
 					'callback' => 'appendElement'
 				),
 				array(
@@ -75,11 +54,12 @@
 		}
 		
 		public function appendElement($context) {
-			
 			// if in edit or new page, and not a static section, and not in the subsection manager
 			if ($this->isInEditOrNew() && !$this->isStaticSection()) {
+				
+				$page = $context['oPage'];
 			
-				$form = Administration::instance()->Page->Form;
+				$form = $page->Form;
 				
 				$button_wrap = new XMLELement('div', NULL, array(
 					'id' => 'save-and',
@@ -99,8 +79,6 @@
 				$button_wrap->appendChild($hidden_return);
 				$button_wrap->appendChild($button_new);
 				$button_wrap->appendChild($hidden_new);
-				
-				//var_dump($form); die;
 				
 				// add content to the right div
 				$div_action = $this->getChildrenWithClass($form, 'div', 'actions');

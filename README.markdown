@@ -1,6 +1,6 @@
 # Save and Return/New Buttons #
 
-Version: 1.4
+Version: 1.5
 
 ## Enables the user to save and return to the list of a section or to save and create a new entry ##
 
@@ -13,9 +13,10 @@ Version: 1.4
 
 ### REQUIREMENTS ###
 
-- Symphony CMS version 2.2 and up (as of the day of the last release of this extension)
+- Symphony CMS version 2.3 and up (as of the day of the last release of this extension)
 - If you use the *Static Section* extension, you must update it to **>= 1.7**
 	- If you don not want to update, use the version [1.1](https://github.com/Solutions-Nitriques/save_and_return/tree/v1.1) instead
+- For Symphony 2.2.x, see the [1.4](https://github.com/Solutions-Nitriques/save_and_return/tree/v1.4) tag
 
 ### INSTALLATION ###
 
