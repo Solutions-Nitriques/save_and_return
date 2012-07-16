@@ -151,9 +151,9 @@
 		private function isStaticSection(){
 			$extman = Symphony::ExtensionManager();
 			
-			$status = $extman->fetchStatus('static_section');
+			$status = $extman->fetchStatus(array('handle' => 'static_section', 'version' => '1'));
 			
-			if ($status == EXTENSION_ENABLED) {
+			if (in_array(EXTENSION_ENABLED, $status)) {
 			
 				$static = Symphony::ExtensionManager()->create('static_section');
 				if ($static !== null) {

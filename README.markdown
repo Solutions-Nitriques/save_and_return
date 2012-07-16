@@ -1,6 +1,6 @@
 # Save and Return/New Buttons #
 
-Version: 1.5
+Version: 1.5.1
 
 ## Enables the user to save and return to the list of a section or to save and create a new entry ##
 
@@ -27,6 +27,6 @@ Version: 1.5
 
 *Voila !*
 
-http://www.nitriques.com/open-source/     
-http://www.deuxhuithuit.com      
+<http://www.nitriques.com/open-source/>     
+<http://www.deuxhuithuit.com>      
 
