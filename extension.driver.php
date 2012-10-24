@@ -83,7 +83,10 @@
 				// add content to the right div
 				$div_action = $this->getChildrenWithClass($form, 'div', 'actions');
 				
-				$div_action->appendChild($button_wrap);
+				// if there is no fields, div_action may not be there
+				if ($div_action != NULL) {
+					$div_action->appendChild($button_wrap);
+				}
 			}
 		}
 		
