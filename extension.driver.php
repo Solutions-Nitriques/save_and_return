@@ -54,11 +54,11 @@
 		}
 		
 		public function appendElement($context) {
-			// if in edit or new page, and not a static section, and not in the subsection manager
-			if ($this->isInEditOrNew() && !$this->isStaticSection()) {
+			// if in edit or new page
+			if ($this->isInEditOrNew()) {
 				
 				$page = $context['oPage'];
-			
+				
 				$form = $page->Form;
 				
 				$button_wrap = new XMLELement('div', NULL, array(
@@ -66,19 +66,28 @@
 					'style' => 'float:right'
 				));
 				
-				$button_return = $this->createButton('save-and-return', 'Save & return');
 				
-				$hidden_return = $this->createHidden('save-and-return-h');
+				// @TODO: Get this from static extension
+				$static_limit = 2;
 				
-				$button_new = $this->createButton('save-and-new', 'Save & new');
+				if (!$this->isStaticSection() || $static_limit > 1) {
+					// add return button in wrapper
+					$button_return = $this->createButton('save-and-return', 'Save & return');
+					$hidden_return = $this->createHidden('save-and-return-h');
+					
+					$button_wrap->appendChild($button_return);
+					$button_wrap->appendChild($hidden_return);
+				}
 				
-				$hidden_new = $this->createHidden('save-and-new-h');
-				
-				// add button in wrapper
-				$button_wrap->appendChild($button_return);
-				$button_wrap->appendChild($hidden_return);
-				$button_wrap->appendChild($button_new);
-				$button_wrap->appendChild($hidden_new);
+				// if we are not in a static section
+				if (!$this->isStaticSection()) {
+					// add the new button
+					$button_new = $this->createButton('save-and-new', 'Save & new');
+					$hidden_new = $this->createHidden('save-and-new-h');
+					
+					$button_wrap->appendChild($button_new);
+					$button_wrap->appendChild($hidden_new);
+				}
 				
 				// add content to the right div
 				$div_action = $this->getChildrenWithClass($form, 'div', 'actions');
@@ -151,18 +160,15 @@
 
 		
 
-		private function isStaticSection(){
+		private function isStaticSection($checkLimitReach=true){
 			$extman = Symphony::ExtensionManager();
 			
 			$status = $extman->fetchStatus(array('handle' => 'static_section', 'version' => '1'));
 			
 			if (in_array(EXTENSION_ENABLED, $status)) {
-			
 				$static = Symphony::ExtensionManager()->create('static_section');
 				if ($static !== null) {
-					
-					return $static->isStaticSection() && $static->isLimitReached();
-					
+					return $static->isStaticSection() && ( ($checkLimitReach && $static->isLimitReached()) || !$checkLimitReach );
 				}
 			}
 			
