@@ -67,10 +67,11 @@
 				));
 				
 				
-				// @TODO: Get this from static extension
-				$static_limit = 2;
+				$static_limit = 0;
 				
-				if (!$this->isStaticSection() || $static_limit > 1) {
+				// if we are not in a static section
+				// or if the limit is more than one (there is a list we can return to)
+				if (!$this->isStaticSection(false, &$static_limit) || $static_limit > 1) {
 					// add return button in wrapper
 					$button_return = $this->createButton('save-and-return', 'Save & return');
 					$hidden_return = $this->createHidden('save-and-return-h');
@@ -160,7 +161,7 @@
 
 		
 
-		private function isStaticSection($checkLimitReach=true){
+		private function isStaticSection($checkLimitReach=true, &$limit=null){
 			$extman = Symphony::ExtensionManager();
 			
 			$status = $extman->fetchStatus(array('handle' => 'static_section', 'version' => '1'));
@@ -168,6 +169,10 @@
 			if (in_array(EXTENSION_ENABLED, $status)) {
 				$static = Symphony::ExtensionManager()->create('static_section');
 				if ($static !== null) {
+					// get limit
+					$limit = $static->getLimit();
+					
+					// return check value
 					return $static->isStaticSection() && ( ($checkLimitReach && $static->isLimitReached()) || !$checkLimitReach );
 				}
 			}
