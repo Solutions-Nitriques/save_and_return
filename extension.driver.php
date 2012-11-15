@@ -134,7 +134,7 @@
 			$c = Administration::instance()->getPageCallback();
 			$c = $c['context']['page'];
 			
-			return ($c == 'edit') || ($c == 'new');
+			return Symphony::Engine()->isLoggedIn() && ($c == 'edit' || $c == 'new');
 		}
 		
 		private function getChildrenWithClass($rootElement, $tagName, $className) {
