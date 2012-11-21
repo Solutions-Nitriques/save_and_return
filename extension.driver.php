@@ -71,7 +71,7 @@
 				
 				// if we are not in a static section
 				// or if the limit is more than one (there is a list we can return to)
-				if (!$this->isStaticSection(false, &$static_limit) || $static_limit > 1) {
+				if (!$this->isStaticSection(false, $static_limit) || $static_limit > 1) {
 					// add return button in wrapper
 					$button_return = $this->createButton('save-and-return', 'Save & return');
 					$hidden_return = $this->createHidden('save-and-return-h');
