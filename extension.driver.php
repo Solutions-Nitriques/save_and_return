@@ -164,6 +164,7 @@
 		private function isStaticSection($checkLimitReach=true, &$limit=null){
 			$extman = Symphony::ExtensionManager();
 			
+			// Old, static section
 			$status = $extman->fetchStatus(array('handle' => 'static_section', 'version' => '1'));
 			
 			if (in_array(EXTENSION_ENABLED, $status)) {
@@ -175,6 +176,17 @@
 					// return check value
 					return $static->isStaticSection() && ( ($checkLimitReach && $static->isLimitReached()) || !$checkLimitReach );
 				}
+			}
+			
+			// New limit section entries
+			$status = $extman->fetchStatus(array('handle' => 'limit_section_entries', 'version' => '1'));
+			
+			if (in_array(EXTENSION_ENABLED, $status)) {
+				require_once (EXTENSIONS . 'limit_section_entries/lib/class.LSE.php');
+				$isEnabled = false;
+				$limit = LSE::getMaxEntries();
+				$total = LSE::getTotalEntries();
+				return $isEnabled && ( ($checkLimitReach && $total >= $limit) || !$checkLimitReach );
 			}
 			
 			return false;
