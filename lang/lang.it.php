@@ -16,7 +16,7 @@
 	 */
 	$dictionary = array(
 
-		'Save & return' => 'Salva & ritorna',
+		'Save & return' => 'Salva & ritorna al menù',
 		
 		'Save & new' => 'Salva & nuovo',
 	
