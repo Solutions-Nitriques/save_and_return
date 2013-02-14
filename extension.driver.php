@@ -182,10 +182,10 @@
 			$status = $extman->fetchStatus(array('handle' => 'limit_section_entries', 'version' => '1'));
 			
 			if (in_array(EXTENSION_ENABLED, $status)) {
-				require_once (EXTENSIONS . 'limit_section_entries/lib/class.LSE.php');
-				$isEnabled = false;
+				require_once (EXTENSIONS . '/limit_section_entries/lib/class.LSE.php');
 				$limit = LSE::getMaxEntries();
 				$total = LSE::getTotalEntries();
+				$isEnabled = $total > 0;
 				return $isEnabled && ( ($checkLimitReach && $total >= $limit) || !$checkLimitReach );
 			}
 			
