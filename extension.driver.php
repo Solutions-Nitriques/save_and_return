@@ -66,12 +66,9 @@
 					'style' => 'float:right'
 				));
 				
-				
-				$static_limit = 0;
-				
-				// if we are not in a static section
-				// or if the limit is more than one (there is a list we can return to)
-				if (!$this->isStaticSection(false, $static_limit) || $static_limit > 1) {
+				// if we are in a static section
+				// and the limit is more than one (there is a list we can return to)
+				if ($this->isStaticSection(false)) {
 					// add return button in wrapper
 					$button_return = $this->createButton('save-and-return', 'Save & return');
 					$hidden_return = $this->createHidden('save-and-return-h');
@@ -81,7 +78,7 @@
 				}
 				
 				// if we are not in a static section
-				if (!$this->isStaticSection()) {
+				if (!$this->isStaticSection() || $this->isStaticSection(false)) {
 					// add the new button
 					$button_new = $this->createButton('save-and-new', 'Save & new');
 					$hidden_new = $this->createHidden('save-and-new-h');
@@ -161,7 +158,7 @@
 
 		
 
-		private function isStaticSection($checkLimitReach=true, &$limit=null){
+		private function isStaticSection($checkLimitReach=true){
 			$extman = Symphony::ExtensionManager();
 			
 			// Old, static section
@@ -185,8 +182,12 @@
 				require_once (EXTENSIONS . '/limit_section_entries/lib/class.LSE.php');
 				$limit = LSE::getMaxEntries();
 				$total = LSE::getTotalEntries();
-				$isEnabled = $total > 0;
-				return $isEnabled && ( ($checkLimitReach && $total >= $limit) || !$checkLimitReach );
+				//$isEnabled = $total != NULL && $total > 0;
+				
+				//var_dump($total, $limit);die;
+				
+				return ($checkLimitReach && $total >= $limit) || 
+						(!$checkLimitReach && $limit == 0);
 			}
 			
 			return false;
