@@ -23,8 +23,12 @@
 		<!-- None -->
 	</dependencies>
 	<releases>
+		<release version="1.7" date="2013-04-04" min="2.3">
+		- Removed compatibility with Static Section
+		- Minor bug fixes
+		</release>
 		<release version="1.6.1" date="2013-02-14" min="2.3">
-		- Fixes for compatibility limit_section_entries
+		- Fixes for compatibility with Limit Section Entries
 		</release>
 		<release version="1.6" date="2012-10-26" min="2.3">
 		- Fixes for compatibility with Static Section, version 1.8.1
