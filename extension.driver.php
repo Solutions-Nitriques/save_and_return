@@ -62,12 +62,16 @@
 					return;
 				}
 				
-				var_dump($limits);
-				
 				// Exit early if the limit is one
 				if ($limits['limit'] == 1) {
 					return;
 				}
+				
+				// add new if limit is 0 or total is less than limit
+				$shouldAddNew = $limits['limit'] == 0 || ($limits['total']+1) < $limits['limit'];
+				
+				// add return if the limit is not 1
+				$shouldAddReturn = $limits['limit'] != 1;
 				
 				$page = $context['oPage'];
 				
@@ -78,9 +82,7 @@
 					'style' => 'float:right'
 				));
 				
-				// if we are in a static section
-				// and the limit is more than one (there is a list we can return to)
-				if ($this->isStaticSection(false)) {
+				if ($shouldAddReturn) {
 					// add return button in wrapper
 					$button_return = $this->createButton('save-and-return', 'Save & return');
 					$hidden_return = $this->createHidden('save-and-return-h');
@@ -89,8 +91,7 @@
 					$button_wrap->appendChild($hidden_return);
 				}
 				
-				// if we are not in a static section
-				if (!$this->isStaticSection() || $this->isStaticSection(false)) {
+				if ($shouldAddNew) {
 					// add the new button
 					$button_new = $this->createButton('save-and-new', 'Save & new');
 					$hidden_new = $this->createHidden('save-and-new-h');
@@ -181,14 +182,10 @@
 				$limit = LSE::getMaxEntries();
 				$total = LSE::getTotalEntries();
 				
-				//var_dump($total, $limit);die;
-				
-				if ($limit > 0) {
-					return array(
-						'limit' => $limit,
-						'total' => $total
-					);
-				}
+				return array(
+					'limit' => $limit,
+					'total' => $total
+				);
 			}
 			
 			return FALSE;

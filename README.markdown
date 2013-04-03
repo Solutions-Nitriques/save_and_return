@@ -14,7 +14,7 @@ Version: 1.7
 ### REQUIREMENTS ###
 
 - Symphony CMS version 2.3 and up (as of the day of the last release of this extension)
-- If you use the *[Static Section](https://github.com/vlad-ghita/limit_section_entries)* extension, you must update it to **>= 1.1.0**
+- If you use the *[Limit Section Entries](https://github.com/vlad-ghita/limit_section_entries)* extension, you must update it to **>= 1.1.0**
 - See the [1.6](https://github.com/Solutions-Nitriques/save_and_return/tree/v1.6) 
 tag if you use the *[Static Section](https://github.com/Solutions-Nitriques/static_section)* extension. You must update it to **>= 1.8.1**
 - For Symphony 2.2.x, see the [1.4](https://github.com/Solutions-Nitriques/save_and_return/tree/v1.4) tag
