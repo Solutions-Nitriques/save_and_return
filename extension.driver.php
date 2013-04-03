@@ -3,8 +3,7 @@
 	if(!defined("__IN_SYMPHONY__")) die("<h2>Error</h2><p>You cannot directly access this file</p>");
 
 	/*
-	Copyight: Deux Huit Huit 2012
-	Copyight: Solutions Nitriques 2011
+	Copyright: Deux Huit Huit 2012-2013
 	License: MIT
 	*/
 	class extension_save_and_return extends Extension {
@@ -41,8 +40,6 @@
 			$isReturn = isset($_POST['fields']['save-and-return-h']) && strlen($_POST['fields']['save-and-return-h']) > 1;
 			$isNew = isset($_POST['fields']['save-and-new-h']) && strlen($_POST['fields']['save-and-new-h']) > 1;
 			
-			//var_dump($context['page']);die();
-			
 			// if save returned no errors and return ou new button was hit
 			if (($isReturn || $isNew) && count($errors) < 1) {
 				redirect(sprintf(
@@ -56,6 +53,21 @@
 		public function appendElement($context) {
 			// if in edit or new page
 			if ($this->isInEditOrNew()) {
+				
+				// Get this section's limit
+				$limits = $this->getSectionLimit();
+				
+				// Exit early if no limits where found
+				if ($limits === FALSE || empty($limits) || !is_array($limits)) {
+					return;
+				}
+				
+				var_dump($limits);
+				
+				// Exit early if the limit is one
+				if ($limits['limit'] == 1) {
+					return;
+				}
 				
 				$page = $context['oPage'];
 				
@@ -158,39 +170,28 @@
 
 		
 
-		private function isStaticSection($checkLimitReach=true){
+		private function getSectionLimit(){
 			$extman = Symphony::ExtensionManager();
 			
-			// Old, static section
-			$status = $extman->fetchStatus(array('handle' => 'static_section', 'version' => '1'));
-			
-			if (in_array(EXTENSION_ENABLED, $status)) {
-				$static = Symphony::ExtensionManager()->create('static_section');
-				if ($static !== null) {
-					// get limit
-					$limit = $static->getLimit();
-					
-					// return check value
-					return $static->isStaticSection() && ( ($checkLimitReach && $static->isLimitReached()) || !$checkLimitReach );
-				}
-			}
-			
-			// New limit section entries
+			// limit section entries
 			$status = $extman->fetchStatus(array('handle' => 'limit_section_entries', 'version' => '1'));
 			
 			if (in_array(EXTENSION_ENABLED, $status)) {
 				require_once (EXTENSIONS . '/limit_section_entries/lib/class.LSE.php');
 				$limit = LSE::getMaxEntries();
 				$total = LSE::getTotalEntries();
-				//$isEnabled = $total != NULL && $total > 0;
 				
 				//var_dump($total, $limit);die;
 				
-				return ($checkLimitReach && $total >= $limit) || 
-						(!$checkLimitReach && $limit == 0);
+				if ($limit > 0) {
+					return array(
+						'limit' => $limit,
+						'total' => $total
+					);
+				}
 			}
 			
-			return false;
+			return FALSE;
 		}
 
 		public function appendJS($context){
@@ -227,4 +228,3 @@
 		}
 	}
 	
-?>
