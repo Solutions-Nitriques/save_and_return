@@ -23,7 +23,10 @@
 		<!-- None -->
 	</dependencies>
 	<releases>
-		<release version="1.8" date="2013-07-25" min="2.3">
+		<release version="1.8.1" date="2015-02-09" min="2.3" max="2.6.x">
+		- Fix errors with sprintf
+		</release>
+		<release version="1.8" date="2013-07-25" min="2.3" max="2.6.x">
 		- Added support for query string: That way, filters will stay active when usign the buttons.
 		</release>
 		<release version="1.7" date="2013-04-04" min="2.3">

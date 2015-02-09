@@ -1,6 +1,6 @@
 # Save and Return/New Buttons #
 
-Version: 1.8
+Version: 1.8.x
 
 ## Enables the user to save and return to the list of a section or to save and create a new entry ##
 
@@ -30,5 +30,5 @@ See <http://getsymphony.com/learn/tasks/view/install-an-extension/>
 
 *Voila !*
 
-<http://www.deuxhuithuit.com>      
+<https://deuxhuithuit.com>      
 
