@@ -150,7 +150,7 @@
 			$queryString = isset($_POST['fields']['save-and-qs']) && strlen($_POST['fields']['save-and-qs']) > 1;
 			
 			if ($queryString) {
-				$queryString = '?' . $_POST['fields']['save-and-qs'];
+				$queryString = '?' . urldecode($_POST['fields']['save-and-qs']);
 			} else {
 				$queryString = '';
 			}
