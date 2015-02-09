@@ -40,13 +40,20 @@
 			$isReturn = isset($_POST['fields']['save-and-return-h']) && strlen($_POST['fields']['save-and-return-h']) > 1;
 			$isNew = isset($_POST['fields']['save-and-new-h']) && strlen($_POST['fields']['save-and-new-h']) > 1;
 			
-			// if save returned no errors and return ou new button was hit
+			// if save returned no errors and return or new button was hit
 			if (($isReturn || $isNew) && count($errors) < 1) {
-				redirect(sprintf(
-					$this->getPath($isNew),
-					SYMPHONY_URL,
-					$section->get('handle')
-				));
+				try {
+					redirect(vsprintf(
+						$this->getPath($isNew),
+						array(
+							SYMPHONY_URL,
+							$section->get('handle')
+						)
+					));
+				} catch (Exception $e) {
+					Symphony::initialiseLog();
+					Symphony::Logs()->pushExceptionToLog($e, true, true, false);
+				}
 			}
 		}
 		
