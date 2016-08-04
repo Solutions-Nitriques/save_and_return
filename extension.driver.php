@@ -61,7 +61,7 @@
 			
 			// if in edit or new page
 			if ($this->isInEditOrNew()) {
-
+				
 				// Get this section's limit
 				$limits = $this->getSectionLimit();
 				
@@ -69,15 +69,15 @@
 				if ($limits === FALSE || empty($limits) || !is_array($limits)) {
 					return;
 				}
-
+				
 				// Exit early if the limit is one
 				if ($limits['limit'] == 1) {
 					return;
 				}
-
+				
 				// add new if limit is 0 or total is less than limit
 				$shouldAddNew = $limits['limit'] == 0 || ($limits['total']+1) < $limits['limit'];
-
+				
 				// add return if the limit is not 1
 				$shouldAddReturn = $limits['limit'] != 1;
 				
