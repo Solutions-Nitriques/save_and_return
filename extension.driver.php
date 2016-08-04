@@ -200,7 +200,7 @@
 		
 		private function getSectionLimit(){
 			$extman = Symphony::ExtensionManager();
-
+			
 			// limit section entries
 			$status = $extman->fetchStatus(array('handle' => 'limit_section_entries', 'version' => '1'));
 			if (in_array(EXTENSION_ENABLED, $status)) {
@@ -217,7 +217,7 @@
 					'total' => $total
 				);
 			}
-
+			
 			return FALSE;
 		}
 	
