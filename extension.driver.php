@@ -200,15 +200,14 @@
 		
 		private function getSectionLimit(){
 			$extman = Symphony::ExtensionManager();
-
+			
 			// limit section entries
 			$status = $extman->fetchStatus(array('handle' => 'limit_section_entries', 'version' => '1'));
 			if (in_array(EXTENSION_ENABLED, $status)) {
-				
 				require_once (EXTENSIONS . '/limit_section_entries/lib/class.LSE.php');
 				$limit = LSE::getMaxEntries();
 				$total = LSE::getTotalEntries();
-				
+
 				return array(
 					'limit' => $limit,
 					'total' => $total
@@ -219,7 +218,7 @@
 					'total' => $total
 				);
 			}
-			
+
 			return FALSE;
 		}
 	
