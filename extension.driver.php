@@ -212,6 +212,9 @@
 					'total' => $total
 				);
 			} else if (!in_array(EXTENSION_ENABLED, $status)){
+				require_once ('/lib/class.SAR.php');
+				$limit = SAR::getMaxEntries();
+				$total = SAR::getTotalEntries();
 				return array(
 					'limit' => $limit,
 					'total' => $total
