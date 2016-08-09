@@ -23,6 +23,10 @@
 		<!-- None -->
 	</dependencies>
 	<releases>
+		<release version="1.8.2" date="2016-08-04" min="2.3" max="2.6.x">
+		- Supported on PHP 7
+		- Fixed Save and Return/New Buttons
+		</release>
 		<release version="1.8.1" date="2015-02-09" min="2.3" max="2.6.x">
 		- Fix errors with sprintf
 		</release>

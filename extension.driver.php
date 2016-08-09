@@ -203,12 +203,18 @@
 			
 			// limit section entries
 			$status = $extman->fetchStatus(array('handle' => 'limit_section_entries', 'version' => '1'));
-			
 			if (in_array(EXTENSION_ENABLED, $status)) {
 				require_once (EXTENSIONS . '/limit_section_entries/lib/class.LSE.php');
 				$limit = LSE::getMaxEntries();
 				$total = LSE::getTotalEntries();
-				
+				return array(
+					'limit' => $limit,
+					'total' => $total
+				);
+			} else if (!in_array(EXTENSION_ENABLED, $status)){
+				require_once ('/lib/class.SAR.php');
+				$limit = SAR::getMaxEntries();
+				$total = SAR::getTotalEntries();
 				return array(
 					'limit' => $limit,
 					'total' => $total
