@@ -23,6 +23,9 @@
 		<!-- None -->
 	</dependencies>
 	<releases>
+		<release version="1.8.2" date="2016-11-02" min="2.3" max="2.6.x">
+		- Fixed some typos
+		</release>
 		<release version="1.8.1" date="2015-02-09" min="2.3" max="2.6.x">
 		- Fix errors with sprintf
 		</release>
