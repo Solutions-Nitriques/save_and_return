@@ -6,7 +6,7 @@ Version: 1.8.x
 
 ### SPECS ###
 
-- Adds to button to the edit and new page of sections:
+- Adds two buttons to the edit and new pages of sections:
 	- Save and return
 	- Save and new
 - Compatible with the *Limit Section Entries* extension
