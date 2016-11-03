@@ -3,7 +3,7 @@
 	if(!defined("__IN_SYMPHONY__")) die("<h2>Error</h2><p>You cannot directly access this file</p>");
 
 	/*
-	Copyright: Deux Huit Huit 2012-2013
+	Copyright: Deux Huit Huit 2012-2016
 	License: MIT
 	*/
 	class extension_save_and_return extends Extension {

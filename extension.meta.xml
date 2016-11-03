@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<extension id="save_and_return" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+<extension id="save_and_return" status="released" xmlns="http://getsymphony.com/schemas/extension/1.0">
 	<name>Save and Return/New Buttons</name>
 	<description>Enables the user to save and return to the list of a section or to save and create a new entry</description>
 	<repo type="github">https://github.com/Solutions-Nitriques/save_and_return</repo>
-	<url type="discuss">http://symphony-cms.com/download/extensions/view/72469/</url>
+	<url type="discuss">http://getsymphony.com/download/extensions/view/72469/</url>
 	<url type="issues">https://github.com/Solutions-Nitriques/save_and_return/issues</url>
 	<types>
 		<type>Interface</type>
@@ -12,11 +12,11 @@
 	<authors>
 		<author>
 			<name github="DeuxHuitHuit" symphony="">Deux Huit Huit</name>
-			<website>http://www.deuxhuithuit.com</website>
+			<website>https://deuxhuithuit.com</website>
 		</author>
 		<author>
 			<name github="Solutions-Nitriques" symphony="nitriques">Solutions Nitriques</name>
-			<website>http://www.nitriques.com/open-source/</website>
+			<website>http://www.nitriques.com/</website>
 		</author>
 	</authors>
 	<dependencies>
