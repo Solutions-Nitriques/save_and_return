@@ -107,7 +107,7 @@
 
 					$button_wrap->appendChild(Widget::SVGIconContainer(
 						'save',
-						$button_return,
+						$button_new,
 						array('id' => 'save-and')
 					));
 					$button_wrap->appendChild($hidden_new);
