@@ -86,6 +86,7 @@
 				$form = $page->Form;
 
 				$button_wrap = new XMLElement('div');
+				$button_wrap->setAttribute('id', 'save-and');
 
 				if ($shouldAddReturn) {
 					// add return button in wrapper
@@ -94,8 +95,7 @@
 
 					$button_wrap->appendChild(Widget::SVGIconContainer(
 						'save',
-						$button_return,
-						array('id' => 'save-and')
+						$button_return
 					));
 					$button_wrap->appendChild($hidden_return);
 				}
@@ -107,8 +107,7 @@
 
 					$button_wrap->appendChild(Widget::SVGIconContainer(
 						'save',
-						$button_new,
-						array('id' => 'save-and')
+						$button_new
 					));
 					$button_wrap->appendChild($hidden_new);
 				}
@@ -244,13 +243,11 @@
 					), time()+100
 				);
 
-				// add CSS for subsection manager
-				Administration::instance()->Page->addElementToHead(
-					new XMLElement(
-						'style',
-						"body.inline.subsection #save-and { display: none; visibility: collapse }",
-						array('type' => 'text/css')
-					), time()+101
+				Administration::instance()->Page->addStylesheetToHead(
+					URL . '/extensions/save_and_return/assets/save_and_return.css',
+					'screen',
+					time() + 1,
+					false
 				);
 			}
 

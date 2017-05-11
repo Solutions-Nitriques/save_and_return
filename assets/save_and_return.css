@@ -1,0 +1,16 @@
+body.inline.subsection #save-and {
+	display: none;
+	visibility: collapse;
+}
+
+@media (max-width: 1023px) {
+	#save-and {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+
+	#save-and > * + * {
+		margin-left: 1rem;
+	}
+}
