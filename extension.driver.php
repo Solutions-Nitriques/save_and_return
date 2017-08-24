@@ -66,7 +66,7 @@
 				$limits = $this->getSectionLimit();
 
 				// Exit early if no limits where found
-				if ($limits === FALSE || empty($limits) || !is_array($limits)) {
+				if ($limits === false || empty($limits) || !is_array($limits)) {
 					return;
 				}
 
@@ -114,7 +114,7 @@
 
 				// save current query string: the raw (visible) query string
 				$queryString = explode('?', $_SERVER['REQUEST_URI'], 2);
-				if ($queryString != FALSE && count($queryString) == 2) {
+				if ($queryString != false && count($queryString) == 2) {
 					$queryString = $queryString[1];
 				} else {
 					$queryString = '';
@@ -127,14 +127,14 @@
 				$div_action = $this->getChildrenWithClass($form, 'div', 'actions');
 
 				// if there is no fields, div_action may not be there
-				if ($div_action != NULL) {
+				if ($div_action != null) {
 					$div_action->insertChildAt(1, $button_wrap);
 				}
 			}
 		}
 
 		private function createButton($id, $value) {
-			$btn = new XMLElement('input', NULL, array(
+			$btn = new XMLElement('input', null, array(
 				'id' => $id,
 				'name' => 'action[save]',
 				'value' => __($value),
@@ -146,7 +146,7 @@
 		}
 
 		private function createHidden($id) {
-			$h = new XMLElement('input', NULL, array(
+			$h = new XMLElement('input', null, array(
 				'id' => $id,
 				'name' => "fields[$id]",
 				'type' => 'hidden'
@@ -181,7 +181,7 @@
 
 		private function getChildrenWithClass($rootElement, $tagName, $className) {
 			if (! ($rootElement) instanceof XMLElement) {
-				return NULL; // not and XMLElement
+				return null; // not and XMLElement
 			}
 
 			// contains the right css class and the right node name
@@ -193,12 +193,12 @@
 			foreach ($rootElement->getChildren() as $child) {
 				$res = $this->getChildrenWithClass($child, $tagName, $className);
 
-				if ($res != NULL) {
+				if ($res != null) {
 					return $res;
 				}
 			}
 
-			return NULL;
+			return null;
 		}
 
 
@@ -219,7 +219,7 @@
 				);
 			}
 
-			return FALSE;
+			return false;
 		}
 
 		public function appendJS($context){
