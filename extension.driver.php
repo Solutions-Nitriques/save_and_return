@@ -35,13 +35,12 @@
 
 		public function entryPostEdit($context) {
 			$section = $context['section'];
-			$errors = Administration::instance()->Page->_errors;
 
 			$isReturn = isset($_POST['fields']['save-and-return-h']) && strlen($_POST['fields']['save-and-return-h']) > 1;
 			$isNew = isset($_POST['fields']['save-and-new-h']) && strlen($_POST['fields']['save-and-new-h']) > 1;
 
-			// if save returned no errors and return or new button was hit
-			if (($isReturn || $isNew) && count($errors) < 1) {
+			// if return or new button was hit
+			if ($isReturn || $isNew) {
 				try {
 					redirect(vsprintf(
 						$this->getPath($isNew),
