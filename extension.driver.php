@@ -35,6 +35,7 @@
 
 		public function entryPostEdit($context) {
 			$section = $context['section'];
+			$errors = Administration::instance()->Page->getErrors();
 
 			$isReturn = isset($_POST['fields']['save-and-return-h']) && strlen($_POST['fields']['save-and-return-h']) > 1;
 			$isNew = isset($_POST['fields']['save-and-new-h']) && strlen($_POST['fields']['save-and-new-h']) > 1;
