@@ -32,16 +32,16 @@
 				)
 			);
 		}
-		
+
 		public function entryPostEdit($context) {
 			$section = $context['section'];
-			$errors = Administration::instance()->Page->_errors;
-			
+			$errors = Administration::instance()->Page->getErrors();
+
 			$isReturn = isset($_POST['fields']['save-and-return-h']) && strlen($_POST['fields']['save-and-return-h']) > 1;
 			$isNew = isset($_POST['fields']['save-and-new-h']) && strlen($_POST['fields']['save-and-new-h']) > 1;
-			
-			// if save returned no errors and return or new button was hit
-			if (($isReturn || $isNew) && count($errors) < 1) {
+
+			// if return or new button was hit
+			if ($isReturn || $isNew) {
 				try {
 					redirect(vsprintf(
 						$this->getPath($isNew),
@@ -56,61 +56,65 @@
 				}
 			}
 		}
-		
+
 		public function appendElement($context) {
-			
+
 			// if in edit or new page
 			if ($this->isInEditOrNew()) {
-				
+
 				// Get this section's limit
 				$limits = $this->getSectionLimit();
-				
+
 				// Exit early if no limits where found
-				if ($limits === FALSE || empty($limits) || !is_array($limits)) {
+				if ($limits === false || empty($limits) || !is_array($limits)) {
 					return;
 				}
-				
+
 				// Exit early if the limit is one
 				if ($limits['limit'] == 1) {
 					return;
 				}
-				
+
 				// add new if limit is 0 or total is less than limit
 				$shouldAddNew = $limits['limit'] == 0 || ($limits['total']+1) < $limits['limit'];
-				
+
 				// add return if the limit is not 1
 				$shouldAddReturn = $limits['limit'] != 1;
-				
+
 				$page = $context['oPage'];
-				
+
 				$form = $page->Form;
-				
-				$button_wrap = new XMLELement('div', NULL, array(
-					'id' => 'save-and',
-					'style' => 'float:right'
-				));
-				
+
+				$button_wrap = new XMLElement('div');
+				$button_wrap->setAttribute('id', 'save-and');
+
 				if ($shouldAddReturn) {
 					// add return button in wrapper
 					$button_return = $this->createButton('save-and-return', 'Save & return');
 					$hidden_return = $this->createHidden('save-and-return-h');
-					
-					$button_wrap->appendChild($button_return);
+
+					$button_wrap->appendChild(Widget::SVGIconContainer(
+						'save',
+						$button_return
+					));
 					$button_wrap->appendChild($hidden_return);
 				}
-				
+
 				if ($shouldAddNew) {
 					// add the new button
 					$button_new = $this->createButton('save-and-new', 'Save & new');
 					$hidden_new = $this->createHidden('save-and-new-h');
-					
-					$button_wrap->appendChild($button_new);
+
+					$button_wrap->appendChild(Widget::SVGIconContainer(
+						'save',
+						$button_new
+					));
 					$button_wrap->appendChild($hidden_new);
 				}
-				
+
 				// save current query string: the raw (visible) query string
 				$queryString = explode('?', $_SERVER['REQUEST_URI'], 2);
-				if ($queryString != FALSE && count($queryString) == 2) {
+				if ($queryString != false && count($queryString) == 2) {
 					$queryString = $queryString[1];
 				} else {
 					$queryString = '';
@@ -118,110 +122,110 @@
 				$qs_hidden = $this->createHidden('save-and-qs');
 				$qs_hidden->setAttribute('value', $queryString);
 				$button_wrap->appendChild($qs_hidden);
-				
+
 				// add content to the right div
 				$div_action = $this->getChildrenWithClass($form, 'div', 'actions');
-				
+
 				// if there is no fields, div_action may not be there
-				if ($div_action != NULL) {
-					$div_action->appendChild($button_wrap);
+				if ($div_action != null) {
+					$div_action->insertChildAt(1, $button_wrap);
 				}
 			}
 		}
-		
+
 		private function createButton($id, $value) {
-			$btn = new XMLElement('input', NULL, array(
+			$btn = new XMLElement('input', null, array(
 				'id' => $id,
 				'name' => 'action[save]',
 				'value' => __($value),
 				'type' => 'submit'
 			));
 			$btn->setSelfClosingTag(true);
-			
+
 			return $btn;
 		}
-		
+
 		private function createHidden($id) {
-			$h = new XMLElement('input', NULL, array(
+			$h = new XMLElement('input', null, array(
 				'id' => $id,
 				'name' => "fields[$id]",
 				'type' => 'hidden'
 			));
 			$h->setSelfClosingTag(true);
-			
+
 			return $h;
 		}
-		
+
 		private function getPath($isNew) {
-			
+
 			$queryString = isset($_POST['fields']['save-and-qs']) && strlen($_POST['fields']['save-and-qs']) > 1;
-			
+
 			if ($queryString) {
 				$queryString = '?' . urldecode($_POST['fields']['save-and-qs']);
 			} else {
 				$queryString = '';
 			}
-			
+
 			if ($isNew) {
 				return '%s/publish/%s/new/' . $queryString;
 			}
 			return '%s/publish/%s/' . $queryString;
 		}
-		
+
 		private function isInEditOrNew() {
 			$c = Administration::instance()->getPageCallback();
 			$c = $c['context']['page'];
-			
+
 			return Symphony::Engine()->isLoggedIn() && ($c == 'edit' || $c == 'new');
 		}
-		
+
 		private function getChildrenWithClass($rootElement, $tagName, $className) {
 			if (! ($rootElement) instanceof XMLElement) {
-				return NULL; // not and XMLElement
+				return null; // not and XMLElement
 			}
-			
+
 			// contains the right css class and the right node name
 			if (strpos($rootElement->getAttribute('class'), $className) > -1 && $rootElement->getName() == $tagName) {
 				return $rootElement;
 			}
-			
+
 			// recursive search in child elements
 			foreach ($rootElement->getChildren() as $child) {
 				$res = $this->getChildrenWithClass($child, $tagName, $className);
-				
-				if ($res != NULL) {
+
+				if ($res != null) {
 					return $res;
 				}
 			}
-			
-			return NULL;
+
+			return null;
 		}
-	
-		
+
+
 		private function getSectionLimit(){
 			$extman = Symphony::ExtensionManager();
-			
+
 			// limit section entries
 			$status = $extman->fetchStatus(array('handle' => 'limit_section_entries', 'version' => '1'));
-			
-			if (in_array(EXTENSION_ENABLED, $status)) {
+
+			if (in_array(Extension::EXTENSION_ENABLED, $status)) {
 				require_once (EXTENSIONS . '/limit_section_entries/lib/class.LSE.php');
 				$limit = LSE::getMaxEntries();
 				$total = LSE::getTotalEntries();
-				
+
 				return array(
 					'limit' => $limit,
 					'total' => $total
 				);
 			}
-			
-			return FALSE;
+
+			return false;
 		}
-	
+
 		public function appendJS($context){
-	
+
 			if ($this->isInEditOrNew()) {
-			
+
 				Administration::instance()->Page->addElementToHead(
 					new XMLElement(
 						'script',
@@ -230,7 +234,7 @@
 								$('#save-and-return').click(function () {
 									$('#save-and-return-h').val('true');
 								});
-								
+
 								$('#save-and-new').click(function () {
 									$('#save-and-new-h').val('true');
 								});
@@ -238,17 +242,15 @@
 						})(jQuery);"
 					), time()+100
 				);
-				
-				// add CSS for subsection manager
-				Administration::instance()->Page->addElementToHead(
-					new XMLElement(
-						'style',
-						"body.inline.subsection #save-and { display: none; visibility: collapse }",
-						array('type' => 'text/css')
-					), time()+101
+
+				Administration::instance()->Page->addStylesheetToHead(
+					URL . '/extensions/save_and_return/assets/save_and_return.css',
+					'screen',
+					time() + 1,
+					false
 				);
 			}
-			
+
 		}
 	}
-	
+
